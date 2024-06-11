@@ -9,7 +9,7 @@ def preprocess(f):
     a = a.reshape(128 * 128 * 3)
     return a
 
-train = "datasets/train/"
+train = 
 
 #What they are
 types = ["Charmander", "Gastly", "Hypno", "Snorlax","Pikachu"]
