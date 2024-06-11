@@ -6,10 +6,17 @@ def preprocess(f):
     image = Image.open(f)
     image = image.resize((128, 128))
     a = np.array(image) / 255.0
-    a = a.reshape(128 * 128 * 3)
+    
+    if len(a.shape) != 3 or a.shape[2] != 3:
+        print("Skipping image", f, "due to incorrect number of channels")
+        return None  # Skip preprocessing for images with incorrect number of channels
+    
+    flattened_size = a.shape[0] * a.shape[1] * a.shape[2]  # Calculate the size
+    a = a.reshape(flattened_size)  # Reshape accordingly
     return a
 
-train = 
+
+train = "Datasets/Train/"
 
 #What they are
 types = ["Charmander", "Gastly", "Hypno", "Snorlax","Pikachu"]
@@ -18,11 +25,7 @@ stop_at = 100
 
 for i in range(len(types)):
     directory = train + types[i]
-    counter = 0
     for filename in os.listdir(directory):
-        counter = counter + 1
-        if counter == stop_at:
-            break
         f = os.path.join(directory, filename)
 
         if not os.path.isfile(f):
@@ -31,6 +34,5 @@ for i in range(len(types)):
         print(f)
         img = preprocess(f)
         label = i
-        # If you are doing a choice from categories
         target = np.zeros(len(types))
         target[label] = 1.0 
