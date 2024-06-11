@@ -14,7 +14,7 @@ train = "datasets/train/"
 #What they are
 types = ["Charmander", "Gastly", "Hypno", "Snorlax","Pikachu"]
 
-stop_at = 
+stop_at = 100
 
 for i in range(len(types)):
     directory = train + types[i]
